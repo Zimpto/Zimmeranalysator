@@ -4,7 +4,7 @@
 
 - [DHT22 by dvarrel](https://github.com/dvarrel/DHT22)
 
-- [Adafruit SSD1306 by Adafruit](https://github.com/dvarrel/DHT22)
+- [Adafruit SSD1306 by Adafruit](https://github.com/adafruit/Adafruit_SSD1306)
   - with dependencies:
     - Adafruit BusIO, 
     - Adafruit GFX
