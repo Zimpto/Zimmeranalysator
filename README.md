@@ -17,14 +17,13 @@
 ## Circuit Board Design
 
 - **Front View**:  
-  ![Zimmeranalysator Front View](ZimmeranalysatorV2/Pictures/Front.png)
-  ![Zimmeranalysator Front View](<img src="ZimmeranalysatorV2/Pictures/Front.png" alt="drawing" width="200"/>)
-
+  ![Zimmeranalysator Front View](ZimmeranalysatorV2/Pictures/PicturesSmall/Front.png)
+  
 - **Front View with Modules**:  
-  ![Zimmeranalysator Front with Modules](ZimmeranalysatorV2/Pictures/FrontWithModules.png)
+  ![Zimmeranalysator Front with Modules](ZimmeranalysatorV2/Pictures/PicturesSmall/FrontWithModules.png)
 
 - **Back View**:  
-  ![Zimmeranalysator Back View](ZimmeranalysatorV2/Pictures/Back.png)
+  ![Zimmeranalysator Back View](ZimmeranalysatorV2/Pictures/PicturesSmall/Back.png)
 
 - **Circuit Design (PDF)**:
   [Circuit Design PDF](ZimmeranalysatorV2/Design/CompleteDesign.pdf)
