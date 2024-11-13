@@ -92,16 +92,10 @@ void evalQuality(double h, short c)
 
   if ((h<40) || (h>60)) digitalWrite(BlueLED,1);
   else digitalWrite(BlueLED,0);
-  if (c>1250)
-  {
-    digitalWrite(RedLED,1);
-    digitalWrite(GreenLED,0);
-  }
-  else
-  {
-    digitalWrite(RedLED,0);
-    digitalWrite(GreenLED,1);
-  }
+  if (c>1250) digitalWrite(RedLED,1);
+  else digitalWrite(RedLED,0);
+
+  digitalWrite(GreenLED,!(digitalRead(BlueLED)|digitalRead(RedLED)));
 }
 
 void getSensoryData(double& t, double& h, short& l, short& c)
@@ -112,6 +106,8 @@ void getSensoryData(double& t, double& h, short& l, short& c)
   h = double(humidity.relative_humidity);
   l = analogRead(PinLDR);       // Read voltage on PinLDR
   c = myMHZ19.getCO2();         // Request CO2 (as ppm)
+
+  evalQuality(h, c);
 }
 
 void initTime(String timezone) 
@@ -200,7 +196,6 @@ void logData(fs::FS &fs){
   if (!file.print(String(TimeArr[5])+"\n")) return;
 
   file.close();
-  evalQuality(DataArr[1], DataArr[3]);
   digitalWrite(YellowLED,0);
 }
 
@@ -336,7 +331,6 @@ void WebsiteHandler()
 
             // get data to Display
             getSensoryData(tem, hum, lux, co2);
-            evalQuality(hum,co2);
             LoadTime(year, mon, mday, hour, minute, sec);
 
             // Display the HTML web page
@@ -439,8 +433,6 @@ void setup()
   dispshortmsg("Calculating climate");
 
   getSensoryData(tem, hum, lux, co2);
-  
-  evalQuality(hum,co2);
 
   Display.ssd1306_command(SSD1306_DISPLAYOFF);
 
@@ -450,26 +442,28 @@ void setup()
 void loop()
 {
   WebsiteHandler();
+
   if (ButtonTrigger)
   {
     getSensoryData(tem, hum, lux, co2);
-    evalQuality(hum,co2);
     DisplayValues(tem, hum, co2, lux);
 
+    timerWrite(timer2, 0);
     timerStart(timer2);
 
     ButtonTrigger = false;
   }
+
   if (TimeTrigger)
   {
     logData(SD);
     TimeTrigger = false;
   }
+  
   if (DispTrig)
   {
     Display.ssd1306_command(SSD1306_DISPLAYOFF);
     timerStop(timer2);
-    timerWrite(timer2, 0);
     DispTrig = false;
   }
 }
