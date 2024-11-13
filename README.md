@@ -17,14 +17,13 @@
 ## Circuit Board Design
 
 - **Front View**:  
-  ![Zimmeranalysator Front View](ZimmeranalysatorV2/Pictures/Front.png)
-  ![Zimmeranalysator Front View](<img src="ZimmeranalysatorV2/Pictures/Front.png" alt="drawing" width="200"/>)
-
+  ![Zimmeranalysator Front View](ZimmeranalysatorV2/Pictures/PicturesSmall/Front.png)
+  
 - **Front View with Modules**:  
-  ![Zimmeranalysator Front with Modules](ZimmeranalysatorV2/Pictures/FrontWithModules.png)
+  ![Zimmeranalysator Front with Modules](ZimmeranalysatorV2/Pictures/PicturesSmall/FrontWithModules.png)
 
 - **Back View**:  
-  ![Zimmeranalysator Back View](ZimmeranalysatorV2/Pictures/Back.png)
+  ![Zimmeranalysator Back View](ZimmeranalysatorV2/Pictures/PicturesSmall/Back.png)
 
 - **Circuit Design (PDF)**:
   [Circuit Design PDF](ZimmeranalysatorV2/Design/CompleteDesign.pdf)
@@ -42,7 +41,8 @@
 2. **Wi-Fi Configuration**: 
    - Create a txt-file on the microSD card with Wi-Fi credentials to connect to the local network.
    - The first row has to be the ssid (network name) and the second row the password.
-3. **Microcontroller Firmware**: Upload the Arduino Code to the ESP32
+3. **Libraries**: Download the following Arduino libraries: TBD
+4. **Microcontroller Software**: Upload the Arduino Code to the ESP32.
 
 
 ### Usage
@@ -60,5 +60,6 @@ A Python script is included to plot the logged data from the microSD card for de
 
 ## Future Enhancements
 
+- Converting the Arduino Code to Micropython for easily changing the website
 - 3D printed Case
 - Algorithm to calculate the exact light intensity in lumen and lux
