@@ -56,6 +56,7 @@ A Python script is included to plot the logged data from the microSD card for de
 
 ### Plotting Data with Python
 
+![Plotted Data](DisplayData/PlottedData.png)
 - TBD
 
 ## Future Enhancements
