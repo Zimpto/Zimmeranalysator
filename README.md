@@ -1,6 +1,6 @@
 # Zimmeranalysator - Room Analyzer 🌡️💧🌞🌿
 
-**Zimmeranalysator** is a custom-designed circuit board for real-time environmental monitoring in indoor spaces. It tracks humidity, temperature, light intensity, and CO₂ levels, logging data to a microSD card and hosting a local website to display the latest readings. The device also offers visual feedback to encourage ventilation for optimal indoor air quality.
+**Zimmeranalysator** is a custom-designed circuit board with the ESP32 for real-time environmental monitoring in indoor spaces. It tracks humidity, temperature, light intensity, and CO₂ levels, logging data to a microSD card and hosting a local website to display the latest readings. The device also offers visual feedback to encourage ventilation for optimal indoor air quality.
 
 ## Features
 
@@ -14,9 +14,20 @@
   - 🔴 Red: High CO₂ levels
   - 🟢 Green: Optimal air quality
 
-## Components
+## Circuit Board Design
 
-- TBD
+- **Front View**:  
+  ![Zimmeranalysator Front View](ZimmeranalysatorV2/Pictures/Front.png)
+  ![Zimmeranalysator Front View](<img src="ZimmeranalysatorV2/Pictures/Front.png" alt="drawing" width="200"/>)
+
+- **Front View with Modules**:  
+  ![Zimmeranalysator Front with Modules](ZimmeranalysatorV2/Pictures/FrontWithModules.png)
+
+- **Back View**:  
+  ![Zimmeranalysator Back View](ZimmeranalysatorV2/Pictures/Back.png)
+
+- **Circuit Design (PDF)**:
+  [Circuit Design PDF](ZimmeranalysatorV2/Design/CompleteDesign.pdf)
 
 ## Getting Started
 
@@ -27,11 +38,17 @@
 
 ### Installation
 
-- TBD
+1. **Hardware Setup**: Assemble the Zimmeranalysator circuit board and insert a microSD card.
+2. **Wi-Fi Configuration**: 
+   - Create a txt-file on the microSD card with Wi-Fi credentials to connect to the local network.
+   - The first row has to be the ssid (network name) and the second row the password.
+3. **Microcontroller Firmware**: Upload the Arduino Code to the ESP32
+
 
 ### Usage
 
 - TBD
+![Zimmeranalysator Web Interface](ZimmeranalysatorV2/Pictures/Schlafzimmer.png)
 
 ## Data Analysis
 
@@ -40,3 +57,8 @@ A Python script is included to plot the logged data from the microSD card for de
 ### Plotting Data with Python
 
 - TBD
+
+## Future Enhancements
+
+- 3D printed Case
+- Algorithm to calculate the exact light intensity in lumen and lux
