@@ -64,4 +64,4 @@ A Python script is included to plot the logged data from the microSD card for de
 - Designing PCB
 - Converting the Arduino Code to Micropython for easily changing the website
 - 3D printed Case
-- Algorithm to calculate the exact light intensity in lux
+- Making an executable program with a GUI to plot the data
