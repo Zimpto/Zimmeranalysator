@@ -161,21 +161,23 @@ void DisplayValues(double T, double H, short CO2, double Lux)
   Display.setCursor(0, 0);
   // Display Temperature
   Display.print("Temp: ");
-  Display.print(T);       
-  Display.drawRect(68, 0, 3, 3, WHITE); // degree
+  Display.print(T);     
+  Display.print("  ");  
+  Display.drawRect(79, 0, 3, 3, WHITE); // degree
   Display.println(" C");
   // Display Humidity
   Display.print("Hum:  ");
   Display.print(H);
-  Display.println("%");
+  Display.println("  %");
   // Display Lux
-  Display.print("Lux:  ");
+  Display.print("Lux: ");
   Display.print(Lux);
-  Display.println(" Lux");
+  Display.println("    Lux");
   // Display CO2
-  Display.print("CO2:  ");
+  Display.print("CO2: ");
   Display.print(CO2);
-  Display.println(" PPM");
+  Display.print(CO2<1000?" ":"");
+  Display.println("    PPM");
 
   Display.display(); 
 }
