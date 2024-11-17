@@ -33,7 +33,7 @@
 #define GreenLED 27
 #define pushButton_pin   33
 #define SDlog_pin 32
-#define PinLDR 34
+#define PinLDR 35
 
 #define timeoutTime 2000
 #define livingroom false
