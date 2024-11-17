@@ -50,7 +50,7 @@ void Website::printWebsite(double tem, double hum, short lux, short co2, uint16_
 	client.println("</span><span>%</span></div><br>");
 	client.println("<div><span>Lichtintensit&aumlt</span>:<span>");
 	client.println(String(lux));
-	client.println("</span><span>p.d.u. (procedure defined unit)</span></div><br>");
+	client.println("</span><span>Lux</span></div><br>");
 	client.println("<div><span>CO2</span>:<span>");
 	client.println(String(co2));
 	client.println("</span><span>PPM</span></div><br>");
