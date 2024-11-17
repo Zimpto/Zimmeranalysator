@@ -36,7 +36,7 @@
 #define PinLDR 35
 
 #define timeoutTime 2000
-#define livingroom false
+#define livingroom true
 
 /* --------------------------------------------------------------------------*/
 
@@ -65,7 +65,8 @@ IPAddress secondaryDNS(8, 8, 4, 4); //optional
 WiFiServer server(80);  // Set web server port number to 80
 
 double tem,hum;     // Actual values for temperature and humidity
-short lux,co2;      // Actual values for lightintensity and CO2
+short analogLux,co2;      // Actual values for lightintensity and CO2
+double lux;
 
 // Actual time variables
 uint16_t year;
@@ -87,6 +88,31 @@ MHZ19 myMHZ19;                 // Create MHZ19 object
 // (SCREEN_WIDTH, SCREEN_HEIGHT, ... , ...)
 Adafruit_SSD1306 Display(128, 32, &Wire, -1);
 
+double analogToLux(short analogValue) {
+    // A function to determine the lux based on the analog value.
+    // It is calculated with the existing voltage divider, the datasheet of the ldr and AI
+    if (analogValue <= 373) {
+        // Under this value the value of lux would be 0.08 or less
+        return 0;
+    } else if (analogValue <= 2048) {
+        // Between the analog values 373 and 2048, lux will be between 0.08 and 1
+        return 0.08 + (1.0 - 0.08) * (analogValue - 373) / (2048 - 373);
+    } else if (analogValue <= 3722) {
+        // Between the analog values 2048 and 3722, lux will be between 1 and 20
+        return 1.0 + (20.0 - 1.0) * (analogValue - 2048) / (3722 - 2048);
+    } else if (analogValue <= 4054) {
+        // Between the analog values 3722 and 4054, lux will be between 20 and 700
+        return 20.0 + (700.0 - 20.0) * (analogValue - 3722) / (4054 - 3722);
+    } else if (analogValue <= 4090) {
+        // Between the analog values 4054 and 4090, lux will be between 700 and 10000
+        return 700.0 + (10000.0 - 700.0) * (analogValue - 4054) / (4090 - 4054);
+    } else {
+        // Between the analog values 4090 and 4095, lux will be fixed at 10000. 
+        // Its the end of the ldr datasheet. It means the ldr has just a few Ohms of resistance
+        return 10000.0;
+    }
+}
+
 void evalQuality(double h, short c)
 {// Air is only good, if 40<hum<60 and CO2<1250 (1400 CO2 is really bad)
 
@@ -98,13 +124,13 @@ void evalQuality(double h, short c)
   digitalWrite(GreenLED,!(digitalRead(BlueLED)|digitalRead(RedLED)));
 }
 
-void getSensoryData(double& t, double& h, short& l, short& c)
+void getSensoryData(double& t, double& h, double& l, short& c)
 {
   sht4.getEvent(&humidity, &temp);// populate humidity and temp objects with fresh data
   // sht4.getEvent(&h, &t);// populate humidity and temp objects with fresh data
   t = double(temp.temperature);
   h = double(humidity.relative_humidity);
-  l = analogRead(PinLDR);       // Read voltage on PinLDR
+  l = analogToLux(analogRead(PinLDR));       // Read voltage on PinLDR
   c = myMHZ19.getCO2();         // Request CO2 (as ppm)
 
   evalQuality(h, c);
@@ -127,7 +153,7 @@ void initTime(String timezone)
   digitalWrite(YellowLED,0);
 }
 
-void DisplayValues(double T, double H, short CO2, short Lux)
+void DisplayValues(double T, double H, short CO2, double Lux)
 {
   Display.ssd1306_command(SSD1306_DISPLAYON);
   Display.clearDisplay();
