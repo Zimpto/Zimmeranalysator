@@ -64,9 +64,10 @@ IPAddress secondaryDNS(8, 8, 4, 4); //optional
 
 WiFiServer server(80);  // Set web server port number to 80
 
-double tem,hum;     // Actual values for temperature and humidity
-short analogLux,co2;      // Actual values for lightintensity and CO2
-double lux;
+double tem,hum;     // Values for temperature and humidity
+double lux;         // Value for lux unit
+short co2;      // Values for lightintensity and CO2
+
 
 // Actual time variables
 uint16_t year;
