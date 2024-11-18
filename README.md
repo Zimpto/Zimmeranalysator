@@ -48,7 +48,7 @@
 ### Usage
 
 - TBD
-![Zimmeranalysator Web Interface](ZimmeranalysatorV2/Pictures/Schlafzimmer.png)
+![Zimmeranalysator Web Interface](ZimmeranalysatorV2/Pictures/Wohnzimmer.png)
 
 ## Data Analysis
 
