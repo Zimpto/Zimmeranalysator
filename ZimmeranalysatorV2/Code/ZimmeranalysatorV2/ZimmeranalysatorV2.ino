@@ -171,14 +171,14 @@ void DisplayValues(double T, double H, short CO2, double Lux)
   Display.print(H);
   Display.println("  %");
   // Display Lux
-  Display.print("Lux: ");
+  Display.print("Lux:  ");
   Display.print(Lux);
-  Display.println("    Lux");
+  Display.println("   Lux");
   // Display CO2
-  Display.print("CO2: ");
+  Display.print("CO2:  ");
   Display.print(CO2);
   Display.print(CO2<1000?" ":"");
-  Display.println("    PPM");
+  Display.println("   PPM");
 
   Display.display(); 
 }
