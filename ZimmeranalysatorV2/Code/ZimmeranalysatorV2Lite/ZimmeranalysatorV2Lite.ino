@@ -32,7 +32,9 @@ double tem,hum;     // Values for temperature and humidity
 double lux;         // Value for lux unit
 short co2;      // Values for lightintensity and CO2
 
+hw_timer_t *timer1 = NULL;          // Setting up hardware timer 1
 hw_timer_t *timer2 = NULL;          // Setting up hardware timer 2
+bool volatile TimeTrigger = false;  // Flag set true by hardware timer
 bool volatile DispTrig = false;     // Flag set true if Display should be turned off
 
 bool volatile ButtonTrigger = false;  // Flag set by button
@@ -138,6 +140,11 @@ void IRAM_ATTR toggleOLED()
   ButtonTrigger = true;
 }
 
+void ARDUINO_ISR_ATTR isrTimer()
+{
+  TimeTrigger = true;
+}
+
 void ARDUINO_ISR_ATTR DispTimer()
 {
   DispTrig = true;
@@ -174,6 +181,10 @@ void setup()
 
   dispshortmsg("Setting Timer");
 
+  timer1 = timerBegin(1000000); // 1 MHz
+  timerAttachInterrupt(timer1, &isrTimer); //attach callback
+  timerAlarm(timer1, 1000000*20, true, 0); //set time in us
+
   timer2 = timerBegin(1000000); // 1 MHz
 
   timerAttachInterrupt(timer2, &DispTimer); //attach callback
@@ -202,6 +213,13 @@ void loop()
     timerStart(timer2);
 
     ButtonTrigger = false;
+  }
+
+  if (TimeTrigger)
+  {
+    getSensoryData(tem, hum, lux, co2);
+    evalQuality(hum, co2);
+    TimeTrigger = false;
   }
   
   if (DispTrig)
